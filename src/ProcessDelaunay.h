@@ -607,7 +607,7 @@ inline double GetCircumcentre(size_t  ip1,
     return (dx * dx + dy * dy);
 }
 
-inline void CheckDelaunay2()
+inline void FixDelaunay()
 {
     double xc, yc, x_star, y_star, rr;
     double rr_sqrt;  // extremities of the grid

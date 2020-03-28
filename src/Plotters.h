@@ -579,10 +579,10 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
             y1 = _yo + jj * ssy;
             x2 = x1 + ssx;
             y2 = y1 + ssy;
-            file << (x1 - _xo) * scale << "  " << (y1 - _yo) * scale << "  ";
-            file << (x1 - _xo) * scale << "  " << (y2 - _yo) * scale << "  ";
-            file << (x2 - _xo) * scale << "  " << (y2 - _yo) * scale << "  ";
-            file << (x2 - _xo) * scale << "  " << (y1 - _yo) * scale << "  ";
+            file << (x1 - _xo) * scale_x << "  " << (y1 - _yo) * scale_x << "  ";
+            file << (x1 - _xo) * scale_x << "  " << (y2 - _yo) * scale_x << "  ";
+            file << (x2 - _xo) * scale_x << "  " << (y2 - _yo) * scale_x << "  ";
+            file << (x2 - _xo) * scale_x << "  " << (y1 - _yo) * scale_x << "  ";
             file << "cell" << endl;
         }
 
@@ -593,10 +593,10 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
             y1 = _yo + jj * ssy;
             x2 = x1 + ssx;
             y2 = y1 + ssy;
-            file << (x1 - _xo) * scale << "  " << (y1 - _yo) * scale << "  ";
-            file << (x1 - _xo) * scale << "  " << (y2 - _yo) * scale << "  ";
-            file << (x2 - _xo) * scale << "  " << (y2 - _yo) * scale << "  ";
-            file << (x2 - _xo) * scale << "  " << (y1 - _yo) * scale << "  ";
+            file << (x1 - _xo) * scale_x << "  " << (y1 - _yo) * scale_x << "  ";
+            file << (x1 - _xo) * scale_x << "  " << (y2 - _yo) * scale_x << "  ";
+            file << (x2 - _xo) * scale_x << "  " << (y2 - _yo) * scale_x << "  ";
+            file << (x2 - _xo) * scale_x << "  " << (y1 - _yo) * scale_x << "  ";
             file << "quad" << endl;
         }
     }
@@ -625,28 +625,29 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
             file << "1 0 0 setrgbcolor" << endl;
         }  // if blue disk
         file << "0.009 setlinewidth" << endl;
-        file << (x[i] - _xo) * scale << " " << (y[i] - _yo) * scale << " "
-             << r_in * scale << " 0 360 arc closepath"
+        file << (x[i] - _xo) * scale_x << " " << (y[i] - _yo) * scale_x << " "
+             << r_in * scale_x << " 0 360 arc closepath"
              << endl;  // disk plotting
         file << "stroke" << endl;
 
         if (r_in != r_out) {
-            file << (x[i] - _xo) * scale << " " << (y[i] - _yo) * scale
-                 << " " << r_out * scale
+            file << (x[i] - _xo) * scale_x << " " << (y[i] - _yo) * scale_x
+                 << " "
+                 << r_out * scale_x
                  << " 0 360 arc closepath"
                  << endl;  // disk plotting
             file << "stroke" << endl;
         }
         // file << "0 0 0 setrgbcolor" << endl;
         // file << "0.1 setlinewidth"<< endl;
-        file << (x[i] - _xo) * scale << " " << (y[i] - _yo) * scale << " "
-             << r_in * 0.1 * scale << " "
+        file << (x[i] - _xo) * scale_x << " " << (y[i] - _yo) * scale_x << " "
+             << r_in * 0.1 * scale_x << " "
              << "0 360 arc" << endl;  // point plotting
         file << "fill" << endl;
         file << "stroke" << endl;
 
         if (false) {
-            file << (x[i] - _xo) * scale << " " << (y[i] - _yo) * scale
+            file << (x[i] - _xo) * scale_x << " " << (y[i] - _yo) * scale_x
                  << " moveto (" << i << ")show" << endl;
             file << "fill" << endl;
             file << "stroke" << endl;
@@ -654,17 +655,11 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
     }
 
     file << "0 0 0 setrgbcolor" << endl;
-    file << (0 - _xo) * scale << "  " << (0 - _yo) * scale_x << "  ";
-    file << (0 - _xo) * scale << "  " << (1.0 - _yo) * scale << "  ";
-    file << (1.0 - _xo) * scale << "  " << (1.0 - _yo) * scale << "  ";
-    file << (1.0 - _xo) * scale << "  " << (0.0 - _yo) * scale << "  ";
+    file << (0 - _xo) * scale_x << "  " << (0 - _yo) * scale_x << "  ";
+    file << (0 - _xo) * scale_x << "  " << (1.0 - _yo) * scale_x << "  ";
+    file << (1.0 - _xo) * scale_x << "  " << (1.0 - _yo) * scale_x << "  ";
+    file << (1.0 - _xo) * scale_x << "  " << (0.0 - _yo) * scale_x << "  ";
     file << "quad_bold" << endl;
-
-
-   
-
-  
-
 
     file.close();
 }

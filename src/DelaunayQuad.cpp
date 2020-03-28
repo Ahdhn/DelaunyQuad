@@ -21,7 +21,6 @@ int main()
 {
     init();
 
-    // srand ( time(NULL) ); // activate for different experiments
     InitiateRandNumGenerator(rand());
 
     // 1)  Dart throwing
@@ -45,7 +44,7 @@ int main()
 
 
     // 3) Process Delaunay mesh
-    CheckDelaunay2();
+    FixDelaunay();
     PlotMesh();
 
 

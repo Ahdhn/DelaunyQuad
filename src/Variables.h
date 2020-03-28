@@ -3,7 +3,7 @@
 #define PI 3.1415926536
 #define TwoPI 6.2831853072
 
-const double _r_input(0.02);
+const double _r_input(0.01);
 const double _r_s(_r_input);
 const double _alpha(2.5);
 const double _r_b(_r_s* _alpha);
@@ -55,6 +55,8 @@ bool*    _circumcenter;
 
 inline void init()
 {
+    // srand ( time(NULL) ); // activate for different experiments
+
     num_active = 0;
     _num_points = 0;
 
