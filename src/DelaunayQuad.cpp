@@ -1,6 +1,6 @@
 #include <string.h>
 #include <time.h>
-
+#include <math.h>
 #include <iostream>
 
 using namespace std;
