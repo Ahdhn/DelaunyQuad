@@ -9,8 +9,8 @@ inline size_t cell_index(size_t i, size_t j)
 inline bool CheckConnectivity(size_t index_A, size_t index_B)
 {
     bool check = false;
-    for (size_t i = 1; i <= node_nodes[index_A][0]; i++) {
-        if (node_nodes[index_A][i] == index_B) {
+    for (size_t i = 1; i <= _node_nodes[index_A][0]; i++) {
+        if (_node_nodes[index_A][i] == index_B) {
             check = true;
             break;
         }
@@ -41,9 +41,9 @@ inline void Partition_2(int& i, int& j, size_t ip)
             i++;
         }
         if (i <= j) {
-            tmp = node_nodes[ip][i + 1];
-            node_nodes[ip][i + 1] = node_nodes[ip][j + 1];
-            node_nodes[ip][j + 1] = tmp;
+            tmp = _node_nodes[ip][i + 1];
+            _node_nodes[ip][i + 1] = _node_nodes[ip][j + 1];
+            _node_nodes[ip][j + 1] = tmp;
             tmp1 = _angles[i];
             _angles[i] = _angles[j];
             _angles[j] = tmp1;
@@ -67,7 +67,7 @@ inline void Sort_2(int left, int right, size_t ip)
 }
 inline void SortDelaunay2(size_t ip)
 {
-    size_t num_nodes = node_nodes[ip][0];
+    size_t num_nodes = _node_nodes[ip][0];
     double dx, dy;
     size_t ip1;
 
@@ -76,7 +76,7 @@ inline void SortDelaunay2(size_t ip)
 
     for (size_t i = 1; i <= num_nodes; i++) {
 
-        ip1 = node_nodes[ip][i];
+        ip1 = _node_nodes[ip][i];
         dx = x[ip1] - xp;
         dy = y[ip1] - yp;
 
@@ -196,7 +196,7 @@ inline bool DelaunayEdgeExist(size_t point1,
 
     double m = (pn_y - po_y) / (pn_x - po_x);
 
-    bool   outside_edge;
+    bool   outside_edge = false;
     size_t ip;
 
     for (int c = int(i_node_i - 15); c <= int(i_node_i + 15); c++) {
@@ -210,14 +210,14 @@ inline bool DelaunayEdgeExist(size_t point1,
             size_t pcell = cell_index(c, r);  // getting the cell index
 
             // ip = cell_point[pcell];
-            if (cell_point2[pcell][0] == 0) {
+            if (_cell_point2[pcell][0] == 0) {
                 continue;
             }
 
             // if(ip!=0){
-            for (size_t AM = 1; AM <= cell_point2[pcell][0]; AM++) {
+            for (size_t AM = 1; AM <= _cell_point2[pcell][0]; AM++) {
                 // ip--;
-                ip = cell_point2[pcell][AM];
+                ip = _cell_point2[pcell][AM];
                 if (ip == point1 || ip == point2) {
                     continue;
                 }
@@ -275,11 +275,11 @@ inline void DelaunayMeshGenerator()
     int    c, r;
 
     for (i = 0; i < _s_d + _s_d; i++) {
-        node_nodes[i][0] = 0;
+        _node_nodes[i][0] = 0;
     }
 
     // loop over each point
-    for (ipoint = 0; ipoint < num_points; ipoint++) {
+    for (ipoint = 0; ipoint < _num_points; ipoint++) {
 
         node_x = x[ipoint];
         node_y = y[ipoint];
@@ -304,13 +304,13 @@ inline void DelaunayMeshGenerator()
                 check_point = false;
 
                 // ip = cell_point[icell];
-                if (cell_point2[icell][0] == 0) {
+                if (_cell_point2[icell][0] == 0) {
                     continue;
                 }
                 // if(ip != 0){
-                for (size_t AM = 1; AM <= cell_point2[icell][0]; AM++) {
+                for (size_t AM = 1; AM <= _cell_point2[icell][0]; AM++) {
                     // ip--;
-                    ip = cell_point2[icell][AM];
+                    ip = _cell_point2[icell][AM];
                     if (ip == ipoint) {
                         continue;
                     }
@@ -324,13 +324,13 @@ inline void DelaunayMeshGenerator()
 
                     if (DelaunayEdgeExist(ipoint, ip, i, j, c, r, node_x,
                                           node_y, xp, yp)) {
-                        node_nodes[ipoint][0]++;
-                        node_nodes[ipoint][node_nodes[ipoint][0]] = ip;
-                        node_nodes[ip][0]++;
-                        node_nodes[ip][node_nodes[ip][0]] = ipoint;
+                        _node_nodes[ipoint][0]++;
+                        _node_nodes[ipoint][_node_nodes[ipoint][0]] = ip;
+                        _node_nodes[ip][0]++;
+                        _node_nodes[ip][_node_nodes[ip][0]] = ipoint;
 
-                        if (node_nodes[ipoint][0] > 15 ||
-                            node_nodes[ip][0] > 15) {
+                        if (_node_nodes[ipoint][0] > 15 ||
+                            _node_nodes[ip][0] > 15) {
                             cout << "Error.. way to many points connected to "
                                     "point in delaunay "
                                  << endl;
@@ -344,4 +344,9 @@ inline void DelaunayMeshGenerator()
             }
         }
     }
+
+     for (size_t i = 0; i < _num_points; i++) {
+        SortDelaunay2(i);
+    }
+
 }

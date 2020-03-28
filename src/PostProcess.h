@@ -91,7 +91,7 @@ inline void FixingAngle()
 {
     size_t V, ip2, Vnext, i, ip1;
 
-    for (i = 0; i < num_points; i++) {
+    for (i = 0; i < _num_points; i++) {
         if (!(x[i] >= 0.0 && x[i] < 1.0 && y[i] >= 0.0 && y[i] < 1.0)) {
             continue;
         }
@@ -166,24 +166,22 @@ inline void RemovePointFromCell_Point(size_t ip)
     ii = size_t((x[ip] - _xo) / _sx);
     jj = size_t((y[ip] - _yo) / _sy);
     icell = ii * _ny + jj;
-    if (cell_point2[icell][0] == 1) {
-        cell_point2[icell][0] = 0;
+    if (_cell_point2[icell][0] == 1) {
+        _cell_point2[icell][0] = 0;
     } else {
-        for (size_t V = 1; V < cell_point2[icell][0]; V++) {
-            if (cell_point2[icell][V] == ip) {
-                cell_point2[icell][V] =
-                    cell_point2[icell][cell_point2[icell][0]];
+        for (size_t V = 1; V < _cell_point2[icell][0]; V++) {
+            if (_cell_point2[icell][V] == ip) {
+                _cell_point2[icell][V] =
+                    _cell_point2[icell][_cell_point2[icell][0]];
                 break;
             }
         }
-        cell_point2[icell][0]--;
+        _cell_point2[icell][0]--;
     }
 }
 inline void RemoveNodesConnectedWithTwoDelaunayEdges()
-{
-
-    size_t ig;
-    for (size_t i = 0; i < num_points; i++) {
+{  
+    for (size_t i = 0; i < _num_points; i++) {
         if (!(x[i] >= 0.0 && x[i] < 1.0 && y[i] >= 0.0 && y[i] < 1.0)) {
             continue;
         }

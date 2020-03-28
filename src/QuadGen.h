@@ -63,16 +63,20 @@ inline void SortQuadMesh2(size_t ip)
 
 inline void QuadMesh_Constructor2()
 {
-    size_t V, dnum, ip, ip1;
+    size_t V, ip, ip1;
 
-    for (ip = 0; ip < num_points; ip++) {
-        for (V = 1; V <= node_nodes[ip][0]; V++) {
-            ip1 = node_nodes[ip][V];
+    for (ip = 0; ip < _num_points; ip++) {
+        for (V = 1; V <= _node_nodes[ip][0]; V++) {
+            ip1 = _node_nodes[ip][V];
             if (_disk_color[ip] == _disk_color[ip1]) {
                 continue;
             }  // same color
             _quad_nodes[ip][0]++;
             _quad_nodes[ip][_quad_nodes[ip][0]] = ip1;
         }
+    }
+
+    for (V = 0; V < _num_points; V++) {
+        SortQuadMesh2(V);
     }
 }

@@ -96,11 +96,11 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
         for (V = i_left; V <= i_right; V++) {
             for (d = j_down; d <= j_up; d++) {
                 icell = V * _ny + d;
-                if (cell_point2[icell][0] == 0) {
+                if (_cell_point2[icell][0] == 0) {
                     continue;
                 }
-                for (s = 1; s <= cell_point2[icell][0]; s++) {
-                    id = cell_point2[icell][s];
+                for (s = 1; s <= _cell_point2[icell][0]; s++) {
+                    id = _cell_point2[icell][s];
                     dx = x_main - x[id];
                     dy = y_main - y[id];
                     dx *= dx;
@@ -123,20 +123,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
         }
     }
     // add the main point
-    x[num_points] = x_main;
-    y[num_points] = y_main;
-    _disk_color[num_points] = color;
-    num_points++;
+    x[_num_points] = x_main;
+    y[_num_points] = y_main;
+    _disk_color[_num_points] = color;
+    _num_points++;
     icell = ii * _ny + jj;
-    cell_point2[icell][0]++;
-    if (cell_point2[icell][0] > 4) {
+    _cell_point2[icell][0]++;
+    if (_cell_point2[icell][0] > 4) {
         cout << "Error (2) at FindMainAddGhosts .....more than 4 points in a "
                 "cell.."
              << endl;
         system("pause");
     }
-    size_t main_point = num_points - 1;
-    cell_point2[icell][cell_point2[icell][0]] = main_point;
+    size_t main_point = _num_points - 1;
+    _cell_point2[icell][_cell_point2[icell][0]] = main_point;
 
 
     _ghost_point[ig1][0] = main_point;  // add the main point to the ghost point
@@ -172,17 +172,17 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
-            _ghost_point[num_points][0] =
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = color;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = color;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (0) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -206,20 +206,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
+            _disk_color[_num_points] = color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (1) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -243,19 +243,19 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _disk_color[_num_points] = color;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (2) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -279,20 +279,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
+            _disk_color[_num_points] = color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (3) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -321,20 +321,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
+            _disk_color[_num_points] = color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (4) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -360,20 +360,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             jj = size_t(abs(_yo - y_p) / _sy);
 
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
+            _disk_color[_num_points] = color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (5) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -398,20 +398,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
+            _disk_color[_num_points] = color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (6) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -435,20 +435,20 @@ inline void FindMainAddGhosts(double xg1, double yg1, size_t ig1)
             ii = size_t(abs(_xo - x_p) / _sx);
             jj = size_t(abs(_yo - y_p) / _sy);
             icell = ii * _ny + jj;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = color;
+            _disk_color[_num_points] = color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            num_points++;
-            if (cell_point2[icell][0] > 10) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _num_points++;
+            if (_cell_point2[icell][0] > 10) {
                 cout << "Error (8) at FindMainAddGhosts().." << endl;
                 system("pause");
             }
@@ -477,12 +477,12 @@ inline void ReconstructDelaunay(size_t ipoint)
 
             icell = c * _ny + r;
 
-            if (cell_point2[icell][0] == 0) {
+            if (_cell_point2[icell][0] == 0) {
                 continue;
             }
 
-            for (size_t AM = 1; AM <= cell_point2[icell][0]; AM++) {
-                ip = cell_point2[icell][AM];
+            for (size_t AM = 1; AM <= _cell_point2[icell][0]; AM++) {
+                ip = _cell_point2[icell][AM];
                 if (ip == ipoint) {
                     continue;
                 }
@@ -502,11 +502,11 @@ inline void ReconstructDelaunay(size_t ipoint)
                 if (DelaunayEdgeExist(ipoint, ip, i, j, c, r, node_x, node_y,
                                       xp, yp)) {
 
-                    node_nodes[ipoint][0]++;
-                    node_nodes[ipoint][node_nodes[ipoint][0]] = ip;
-                    node_nodes[ip][0]++;
-                    node_nodes[ip][node_nodes[ip][0]] = ipoint;
-                    if (node_nodes[ipoint][0] > 19 || node_nodes[ip][0] > 19) {
+                    _node_nodes[ipoint][0]++;
+                    _node_nodes[ipoint][_node_nodes[ipoint][0]] = ip;
+                    _node_nodes[ip][0]++;
+                    _node_nodes[ip][_node_nodes[ip][0]] = ipoint;
+                    if (_node_nodes[ipoint][0] > 19 || _node_nodes[ip][0] > 19) {
                         cout << "Error.. way to many points connected to point "
                                 "in delaunay "
                              << endl;
@@ -525,31 +525,31 @@ inline void RemoveConnectivity(size_t ip)
 {
     // remove (ip) from all points connected to it
     // remove all points connected to (ip)
-    size_t V, d, ip1, q, w;
+    size_t V, d, ip1;
     bool   found;
-    for (V = 1; V <= node_nodes[ip][0]; V++) {
-        ip1 = node_nodes[ip][V];
+    for (V = 1; V <= _node_nodes[ip][0]; V++) {
+        ip1 = _node_nodes[ip][V];
         // remove ip from ip1
         found = false;
-        for (d = 1; d < node_nodes[ip1][0]; d++) {
-            if (node_nodes[ip1][d] == ip) {
+        for (d = 1; d < _node_nodes[ip1][0]; d++) {
+            if (_node_nodes[ip1][d] == ip) {
                 found = true;
             }  // first find ip
             if (found) {
-                node_nodes[ip1][d] =
-                    node_nodes[ip1][d + 1];  // move the point on step to
+                _node_nodes[ip1][d] =
+                    _node_nodes[ip1][d + 1];  // move the point on step to
                                              // preserve the sorted order
             }
         }
-        if (!found && node_nodes[ip1][d] != ip) {
+        if (!found && _node_nodes[ip1][d] != ip) {
             cout << "Error at RemoveConnectivity().." << endl;
             system("pause");
         }
-        node_nodes[ip1][0]--;
+        _node_nodes[ip1][0]--;
     }
 
 
-    node_nodes[ip][0] = 0;  // remove all points connected to (ip)
+    _node_nodes[ip][0] = 0;  // remove all points connected to (ip)
 }
 inline double GetCircumcentre(size_t  ip1,
                               size_t  ip2,
@@ -609,18 +609,12 @@ inline double GetCircumcentre(size_t  ip1,
 
 inline void CheckDelaunay2()
 {
-    double xc, yc, x_star, y_star, rr, dx, dy, dist, xi, yi;
-    double x_min, y_min, x_max, y_max, rr_sqrt;  // extremities of the grid
-    bool   break_point;
-    size_t i, j, ip1, ip2, ins, jnext, color, icell, ii, jj, s, id, q, w, ig,
-        i_close, color1;
-    size_t V, d, iactive;
-    double lx, ly, s_grid, r_com_sq;  // grid lengths and spacing
-    size_t num_active_tmp, n_grid_x, n_grid_y, iv, jv, first,
-        ic;  // active cells temp, and number of cell in each dierection
-    double xii, yii, xii1, yii1, xfar, yfar;
-    size_t num_tmp_active;
-    bool   conflicting;
+    double xc, yc, x_star, y_star, rr;
+    double rr_sqrt;  // extremities of the grid
+   
+    size_t i, j, ip1, ip2, jnext, color, icell, ii, jj, s, id, q, w, ig;
+      
+    size_t V, d;
 
     size_t* r_b_covered =
         new size_t[2];  // array tells if the cell is covered by r_out of only
@@ -637,7 +631,7 @@ inline void CheckDelaunay2()
     while (again) {
         again = false;
 
-        for (i = 0; i < num_points; i++) {
+        for (i = 0; i < _num_points; i++) {
 
             x_star = x[i];
             y_star = y[i];
@@ -646,14 +640,14 @@ inline void CheckDelaunay2()
                 continue;
             }
 
-            for (j = 1; j <= node_nodes[i][0]; j++) {
+            for (j = 1; j <= _node_nodes[i][0]; j++) {
                 jnext = j + 1;
-                if (j == node_nodes[i][0]) {
+                if (j == _node_nodes[i][0]) {
                     jnext = 1;
                 }
 
-                ip1 = node_nodes[i][j];
-                ip2 = node_nodes[i][jnext];
+                ip1 = _node_nodes[i][j];
+                ip2 = _node_nodes[i][jnext];
 
                 if (_disk_color[ip1] == _disk_color[ip2] &&
                     _disk_color[i] == _disk_color[ip2]) {  // if three vertices
@@ -714,50 +708,50 @@ inline void CheckDelaunay2()
                         _circumcenter[_list_of_removed_disks
                                           [_list_of_removed_disks[0]]] = true;
                         KO = baba;
-                        num_points++;
+                        _num_points++;
 
                         ii = size_t((xc - _xo) / _sx);
                         jj = size_t((yc - _yo) / _sy);
                         icell = ii * _ny + jj;
-                        cell_point2[icell][0]++;
-                        cell_point2[icell][cell_point2[icell][0]] = baba;
+                        _cell_point2[icell][0]++;
+                        _cell_point2[icell][_cell_point2[icell][0]] = baba;
 
                         if (xc >= 0.0 && xc < 1.0 && yc >= 0.0 && yc < 1.0) {
                             MirrorPoint(baba, xc, yc, _r_input,
                                         _disk_color[baba]);
                         } else {
-                            FindMainAddGhosts(xc, yc, num_points - 1);
+                            FindMainAddGhosts(xc, yc, _num_points - 1);
                         }
                         _list_of_removed_disks[0]--;
                     }
 
                     else {
-                        x[num_points] = xc;
-                        y[num_points] = yc;
+                        x[_num_points] = xc;
+                        y[_num_points] = yc;
                         if (color == 1) {
-                            _disk_color[num_points] = 0;
+                            _disk_color[_num_points] = 0;
                         } else {
-                            _disk_color[num_points] = 1;
+                            _disk_color[_num_points] = 1;
                         }
-                        id = num_points;  // lets just name the new point id
+                        id = _num_points;  // lets just name the new point id
 
-                        _circumcenter[num_points] = true;
-                        KO = num_points;
-                        num_points++;
+                        _circumcenter[_num_points] = true;
+                        KO = _num_points;
+                        _num_points++;
 
                         ii = size_t((xc - _xo) / _sx);
                         jj = size_t((yc - _yo) / _sy);
                         icell = ii * _ny + jj;
-                        cell_point2[icell][0]++;
-                        cell_point2[icell][cell_point2[icell][0]] =
-                            num_points - 1;
+                        _cell_point2[icell][0]++;
+                        _cell_point2[icell][_cell_point2[icell][0]] =
+                            _num_points - 1;
                         if (xc >= 0.0 && xc < 1.0 && yc >= 0.0 && yc < 1.0) {
                             MirrorPoint(
-                                num_points - 1, xc, yc, _r_input,
-                                _disk_color[num_points -
+                                _num_points - 1, xc, yc, _r_input,
+                                _disk_color[_num_points -
                                             1]);  // add new mirror points
                         } else {
-                            FindMainAddGhosts(xc, yc, num_points - 1);
+                            FindMainAddGhosts(xc, yc, _num_points - 1);
                         }
                     }
 
@@ -799,11 +793,11 @@ inline void CheckDelaunay2()
                     for (V = i_left; V <= i_right; V++) {
                         for (d = j_down; d <= j_up; d++) {
                             icell = V * _ny + d;
-                            if (cell_point2[icell][0] == 0) {
+                            if (_cell_point2[icell][0] == 0) {
                                 continue;
                             }
-                            for (s = 1; s <= cell_point2[icell][0]; s++) {
-                                id = cell_point2[icell][s];
+                            for (s = 1; s <= _cell_point2[icell][0]; s++) {
+                                id = _cell_point2[icell][s];
 
                                 if (_active[id] == 0) {
                                     cout << "Error(1).. not active point in "
@@ -856,11 +850,11 @@ inline void CheckDelaunay2()
                     for (V = i_left; V <= i_right; V++) {
                         for (d = j_down; d <= j_up; d++) {
                             icell = V * _ny + d;
-                            if (cell_point2[icell][0] == 0) {
+                            if (_cell_point2[icell][0] == 0) {
                                 continue;
                             }
-                            for (s = 1; s <= cell_point2[icell][0]; s++) {
-                                id = cell_point2[icell][s];
+                            for (s = 1; s <= _cell_point2[icell][0]; s++) {
+                                id = _cell_point2[icell][s];
                                 if (_active[id] == 0) {
                                     cout << "Error(0).. not active point in a "
                                             "cell "
@@ -914,21 +908,21 @@ inline void CheckDelaunay2()
                     for (V = i_left; V <= i_right; V++) {
                         for (d = j_down; d <= j_up; d++) {
                             icell = V * _ny + d;
-                            if (cell_point2[icell][0] == 0) {
+                            if (_cell_point2[icell][0] == 0) {
                                 continue;
                             }
-                            for (s = 1; s <= cell_point2[icell][0]; s++) {
+                            for (s = 1; s <= _cell_point2[icell][0]; s++) {
                                 SortDelaunay2(
-                                    cell_point2[icell]
+                                    _cell_point2[icell]
                                                [s]);  // sorting delaunay edges
                                                       // of this main point
 
-                                id = cell_point2[icell]
+                                id = _cell_point2[icell]
                                                 [s];  // sort the delaunay edges
                                                       // connected to this main
                                                       // point
-                                for (q = 1; q <= node_nodes[id][0]; q++) {
-                                    SortDelaunay2(node_nodes[id][q]);
+                                for (q = 1; q <= _node_nodes[id][0]; q++) {
+                                    SortDelaunay2(_node_nodes[id][q]);
                                 }
 
                                 // if it's insdie the domain
@@ -943,10 +937,10 @@ inline void CheckDelaunay2()
                                                  //  with this main point)
                                         ig = _ghost_point[id][q];
                                         SortDelaunay2(ig);
-                                        for (w = 1; w <= node_nodes[ig][0];
+                                        for (w = 1; w <= _node_nodes[ig][0];
                                              w++) {
                                             SortDelaunay2(
-                                                node_nodes[ig]
+                                                _node_nodes[ig]
                                                           [w]);  // sort edge
                                                                  // connected to
                                                                  // this ghost
@@ -959,9 +953,9 @@ inline void CheckDelaunay2()
                                         ig);  // sort edges of the main point of
                                               // this ghost point
 
-                                    for (q = 1; q <= node_nodes[ig][0]; q++) {
+                                    for (q = 1; q <= _node_nodes[ig][0]; q++) {
                                         SortDelaunay2(
-                                            node_nodes[ig]
+                                            _node_nodes[ig]
                                                       [q]);  // then sort the
                                                              // edges connect to
                                                              // the main

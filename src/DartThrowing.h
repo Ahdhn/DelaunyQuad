@@ -45,21 +45,21 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
 
-            _disk_color[num_points] = disk_color;
+            _disk_color[_num_points] = disk_color;
 
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (0) at MirrorPoint().." << endl;
                 if (false) {
                     PlotSinglePoint(x_p, y_p);
@@ -76,21 +76,21 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (1) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -104,21 +104,21 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (2) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -131,25 +131,25 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
             if (false) {
                 PlotSinglePoint(x_p, y_p);
             }
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (3) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -168,21 +168,21 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (4) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -200,22 +200,22 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
 
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (5) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -233,21 +233,21 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (6) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -266,21 +266,21 @@ inline void MirrorPoint(size_t main_point,
             i = size_t(abs(_xo - x_p) / _sx);
             j = size_t(abs(_yo - y_p) / _sy);
             icell = i * _ny + j;
-            x[num_points] = x_p;
-            y[num_points] = y_p;
+            x[_num_points] = x_p;
+            y[_num_points] = y_p;
 
-            _ghost_point[num_points][0] =
+            _ghost_point[_num_points][0] =
                 main_point;  // add the main point to the ghost point
             _ghost_point[main_point][0]++;  // add ghost point to the main point
-            _ghost_point[main_point][_ghost_point[main_point][0]] = num_points;
-            _disk_color[num_points] = disk_color;
-            // num_points++;
-            // cell_point[icell] = num_points;
-            cell_point2[icell][0]++;
-            cell_point2[icell][cell_point2[icell][0]] = num_points;
-            _circumcenter[num_points] = false;
-            num_points++;
-            if (cell_point2[icell][0] > 2) {
+            _ghost_point[main_point][_ghost_point[main_point][0]] = _num_points;
+            _disk_color[_num_points] = disk_color;
+            // _num_points++;
+            // cell_point[icell] = _num_points;
+            _cell_point2[icell][0]++;
+            _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+            _circumcenter[_num_points] = false;
+            _num_points++;
+            if (_cell_point2[icell][0] > 2) {
                 cout << "Error (8) at MirrorPoint().." << endl;
                 system("pause");
             }
@@ -299,7 +299,7 @@ inline void DartThrowingWithColors(
     size_t num_darts, idart, rand_index, icell, neighbor_cell, pointer, count;
     size_t c, r, i, ii, iii, j, jj, jjj, half_cell_x, half_cell_y, iactive;
     double rand_x, rand_y;
-    double x_start, x_end, y_start, y_end, xx, yy;
+    double xx, yy;
     double xmin, ymin, xmax, ymax;
     double xp, yp, dist_x, dist_y, dist;
     double sssx, sssy;
@@ -309,7 +309,7 @@ inline void DartThrowingWithColors(
     size_t num_tmp_active;
     bool   check_point;
     bool   no_active_cells;
-    bool   inside;
+
     double r_com_sq;
 
     double ssx = _sx;
@@ -328,7 +328,7 @@ inline void DartThrowingWithColors(
 
     RF = 0.8;
 
-    for (int iref = 0; iref < num_refinement_levels;
+    for (int iref = 0; iref < _num_refinement_levels;
          iref++)  // loop for refining active cells
     {
 
@@ -344,8 +344,8 @@ inline void DartThrowingWithColors(
 
             rand_index = size_t((num_active - 1) * ((double)rand() / RAND_MAX));
 
-            ii = active_i[rand_index];
-            jj = active_j[rand_index];
+            ii = _active_i[rand_index];
+            jj = _active_j[rand_index];
 
             i = size_t(double(ii / pow(2, double(iref))));
             j = size_t(double(jj / pow(2, double(iref))));
@@ -370,9 +370,9 @@ inline void DartThrowingWithColors(
             } else {
                 color = 1;
             }
-            /* if(num_points==0){color=0;}
-             else if(_disk_color[num_points-1]==0){color=1;}
-             else if(_disk_color[num_points-1]==1){color=0;}*/
+            /* if(_num_points==0){color=0;}
+             else if(_disk_color[_num_points-1]==0){color=1;}
+             else if(_disk_color[_num_points-1]==1){color=0;}*/
 
             // checking the conflict
             bool close = false;
@@ -385,14 +385,14 @@ inline void DartThrowingWithColors(
                     neighbor_cell = c * _ny + r;
                     // pointer = cell_point[neighbor_cell];
                     // if (pointer > 0){
-                    if (cell_point2[neighbor_cell][0] > 1) {
+                    if (_cell_point2[neighbor_cell][0] > 1) {
                         cout << "Error(0) at DartThrowingWithColors(). "
                              << endl;
                         system("pause");
                     }
-                    if (cell_point2[neighbor_cell][0] > 0) {
+                    if (_cell_point2[neighbor_cell][0] > 0) {
                         // pointer-=1;
-                        pointer = cell_point2[neighbor_cell]
+                        pointer = _cell_point2[neighbor_cell]
                                              [1];  // at this stage each cell
                                                    // contains one point only
                         xp = x[pointer];
@@ -422,34 +422,34 @@ inline void DartThrowingWithColors(
 
             if (!close) {
 
-                // cell_point[icell] = num_points + 1;  // adding the new dart
+                // cell_point[icell] = _num_points + 1;  // adding the new dart
                 // and updating x,y arraies
-                cell_point2[icell][0]++;  // adding the new dart and updating
+                _cell_point2[icell][0]++;  // adding the new dart and updating
                                           // x,y arraies
-                cell_point2[icell][cell_point2[icell][0]] = num_points;
-                if (cell_point2[icell][0] > 1) {
+                _cell_point2[icell][_cell_point2[icell][0]] = _num_points;
+                if (_cell_point2[icell][0] > 1) {
                     cout << "Error(1) at DartThrowingWithColors(). " << endl;
                     system("pause");
                 }
 
 
-                x[num_points] = xx;
-                y[num_points] = yy;
+                x[_num_points] = xx;
+                y[_num_points] = yy;
 
-                _disk_color[num_points] = color;
-                /*if(num_points==0){_disk_color[num_points]=0;}// first disk is
+                _disk_color[_num_points] = color;
+                /*if(_num_points==0){_disk_color[_num_points]=0;}// first disk is
                 blue else{
 
-                    if(_disk_color[num_points-1]==0){_disk_color[num_points]=1;}//
+                    if(_disk_color[_num_points-1]==0){_disk_color[_num_points]=1;}//
                 if previous disk is blue, then this one is red
-                    else{_disk_color[num_points]=0;} // esle, make it blue
+                    else{_disk_color[_num_points]=0;} // esle, make it blue
                 }*/
 
-                num_points++;
+                _num_points++;
 
 
-                MirrorPoint(num_points - 1, xx, yy, _r_input,
-                            _disk_color[num_points - 1]);
+                MirrorPoint(_num_points - 1, xx, yy, _r_input,
+                            _disk_color[_num_points - 1]);
 
                 // PLOT(_r_s,_r_b,0,0,0);
 
@@ -460,8 +460,8 @@ inline void DartThrowingWithColors(
                     break;
                 }
 
-                active_i[rand_index] = active_i[num_active];
-                active_j[rand_index] = active_j[num_active];
+                _active_i[rand_index] = _active_i[num_active];
+                _active_j[rand_index] = _active_j[num_active];
             }        
         }
 
@@ -472,13 +472,13 @@ inline void DartThrowingWithColors(
         // PLOT(_r_s,_r_b,iref+1,ssx,ssy);
 
         if (no_active_cells == true) {
-            // delete[] active_i;
-            // delete[] active_j;
+            // delete[] _active_i;
+            // delete[] _active_j;
             break;
         }
 
-        // tmp_active_i = new size_t[4*num_active];
-        // tmp_active_j = new size_t[4*num_active];
+        // _tmp_active_i = new size_t[4*num_active];
+        // _tmp_active_j = new size_t[4*num_active];
         num_tmp_active = 0;
         no_active_cells = false;
 
@@ -487,8 +487,8 @@ inline void DartThrowingWithColors(
 
         for (iactive = 0; iactive < num_active; iactive++) {
 
-            ii = active_i[iactive];
-            jj = active_j[iactive];
+            ii = _active_i[iactive];
+            jj = _active_j[iactive];
 
 
             i = size_t(double(ii / pow(2.0, double(iref))));
@@ -512,9 +512,9 @@ inline void DartThrowingWithColors(
                     // pointer = cell_point[neighbor_cell];
 
                     // if(pointer>0){
-                    if (cell_point2[neighbor_cell][0] > 0) {
+                    if (_cell_point2[neighbor_cell][0] > 0) {
                         // pointer--;
-                        pointer = cell_point2[neighbor_cell]
+                        pointer = _cell_point2[neighbor_cell]
                                              [1];  // at this stage cell
                                                    // contains one point only
                         xp = x[pointer];
@@ -578,9 +578,9 @@ inline void DartThrowingWithColors(
                             // pointer = cell_point[neighbor_cell];
 
                             // if(pointer != 0){
-                            if (cell_point2[neighbor_cell][0] > 0) {
+                            if (_cell_point2[neighbor_cell][0] > 0) {
                                 // pointer--;
-                                pointer = cell_point2[neighbor_cell][1];
+                                pointer = _cell_point2[neighbor_cell][1];
                                 xp = x[pointer];
                                 yp = y[pointer];
                                 FarPoint(xp, yp, xmin, xmax, ymin, ymax, xfar,
@@ -612,34 +612,34 @@ inline void DartThrowingWithColors(
                         continue;
                     }  // covered by a blue and red disk
 
-                    tmp_active_i[num_tmp_active] = iii;
-                    tmp_active_j[num_tmp_active] = jjj;
+                    _tmp_active_i[num_tmp_active] = iii;
+                    _tmp_active_j[num_tmp_active] = jjj;
                     num_tmp_active++;
-                    if (num_tmp_active > num_expected) {
+                    if (num_tmp_active > _num_expected) {
                         cout << "Do something (0).. We are losing the baby "
                              << endl;
-                        system("pause");
+                        exit(EXIT_FAILURE);
                     }
                 }
             }
         }
 
 
-        // delete [] active_i;
-        // delete [] active_j;
+        // delete [] _active_i;
+        // delete [] _active_j;
 
         num_active = num_tmp_active;
         if (num_active != 0) {
 
-            // active_i = new size_t [num_active];
-            // active_j = new size_t [num_active];
+            // _active_i = new size_t [num_active];
+            // _active_j = new size_t [num_active];
 
             for (count = 0; count < num_active; count++) {
-                active_i[count] = tmp_active_i[count];
-                active_j[count] = tmp_active_j[count];
+                _active_i[count] = _tmp_active_i[count];
+                _active_j[count] = _tmp_active_j[count];
             }
-            // delete[] tmp_active_i;
-            // delete[] tmp_active_j;
+            // delete[] _tmp_active_i;
+            // delete[] _tmp_active_j;
         } else {
             break;
         }

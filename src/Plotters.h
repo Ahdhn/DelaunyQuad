@@ -12,7 +12,7 @@ inline void PlotQuadMesh(std::string file_name = "Quad Mesh.ps")
     quad_mesh << "%!PS-Adobe-3.0" << endl;
     quad_mesh << "60 60 scale     % one unit = one Centimeter" << endl;
 
-    double scale_x, scale_y, scale_mesh, shift_x, shift_y;
+    double scale_x, scale_mesh, shift_x, shift_y;
     scale_x = 11.0 / (_nx * _sx);
 
     scale_mesh = scale_x;
@@ -94,7 +94,7 @@ inline void PlotQuadMesh(std::string file_name = "Quad Mesh.ps")
     double xc, yc, xg, yg;
 
 
-    for (size_t g = 0; g < num_points; g++) {
+    for (size_t g = 0; g < _num_points; g++) {
         if (_active[g] == 0) {
             continue;
         }
@@ -135,7 +135,7 @@ inline void PlotQuadMesh(std::string file_name = "Quad Mesh.ps")
         quad_mesh << "stroke" << endl;
     }
 
-    for (size_t i = 0; i < num_points; i++) {
+    for (size_t i = 0; i < _num_points; i++) {
         if (_active[i] == 0) {
             continue;
         }
@@ -164,7 +164,7 @@ inline void PlotQuadMesh(std::string file_name = "Quad Mesh.ps")
 
 
     if (false) {
-        for (size_t V = 0; V < num_points; V++) {
+        for (size_t V = 0; V < _num_points; V++) {
             if (_active[V] == 0) {
                 continue;
             }
@@ -230,14 +230,14 @@ inline void PlotMesh()
 
     fstream CAD("delaunay.txt", ios::out);
 
-    double scale_x, scale_y, scale_mesh, shift_x, shift_y;
+    double scale_x, scale_mesh, shift_x, shift_y;
     scale_x = 11.0 / (_nx * _sx);
 
     scale_mesh = scale_x;
     shift_x = 0;
-
-    shift_y = 0.05 * (28.0 - (_ny * _sy) * scale_mesh) + 1.5;
     scale = scale_mesh;
+    shift_y = 0.05 * (28.0 - (_ny * _sy) * scale_mesh) + 1.5;
+   
     mesh << shift_x << " " << shift_y << " translate" << endl;
 
     mesh << "/quad_bold      % stack: x1 y1_ x2 y2 x3 y3 x4 y4" << endl;
@@ -301,7 +301,7 @@ inline void PlotMesh()
         << "," << 0 << endl
         << endl;
 
-    for (size_t g = 0; g < num_points; g++) {
+    for (size_t g = 0; g < _num_points; g++) {
 
         xc = x[g];
         yc = y[g];
@@ -326,10 +326,10 @@ inline void PlotMesh()
 
         mesh << "0.01 setlinewidth" << endl;
 
-        for (size_t k = 1; k <= node_nodes[g][0]; k++) {
+        for (size_t k = 1; k <= _node_nodes[g][0]; k++) {
 
-            xg = x[node_nodes[g][k]];
-            yg = y[node_nodes[g][k]];
+            xg = x[_node_nodes[g][k]];
+            yg = y[_node_nodes[g][k]];
 
             mesh << (xc - _xo) * scale_mesh << " " << (yc - _yo) * scale_mesh
                  << " "
@@ -346,7 +346,7 @@ inline void PlotMesh()
         mesh << "stroke" << endl;
     }
 
-    for (size_t i = 0; i < num_points; i++) {
+    for (size_t i = 0; i < _num_points; i++) {
 
 
         if (_active[i] == 0) {
@@ -395,25 +395,25 @@ inline void PlotMesh()
     mesh << "quad_bold" << endl;
 
     if (false) {
-        mesh << (-100 - _xo) * scale << " " << (0 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (0 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (-100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (-100 - _yo) * scale
+        mesh << (-100 - _xo) * scale_mesh << " " << (0 - _yo) * scale_mesh << " "
+             << (100 - _xo) * scale_mesh << " " << (0 - _yo) * scale_mesh << " "
+             << (100 - _xo) * scale_mesh << " " << (-100 - _yo) * scale_mesh << " "
+             << (-100 - _xo) * scale_mesh << " " << (-100 - _yo) * scale_mesh
              << " quad_white" << endl;
-        mesh << (0 - _xo) * scale << " " << (-100 - _yo) * scale << " "
-             << (0 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (-100 - _yo) * scale
+        mesh << (0 - _xo) * scale_mesh << " " << (-100 - _yo) * scale_mesh << " "
+             << (0 - _xo) * scale_mesh << " " << (100 - _yo) * scale_mesh << " "
+             << (-100 - _xo) * scale_mesh << " " << (100 - _yo) * scale_mesh << " "
+             << (-100 - _xo) * scale_mesh << " " << (-100 - _yo) * scale_mesh
              << " quad_white" << endl;
-        mesh << (-100 - _xo) * scale << " " << (1 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (1 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (100 - _yo) * scale
+        mesh << (-100 - _xo) * scale_mesh << " " << (1 - _yo) * scale_mesh << " "
+             << (100 - _xo) * scale_mesh << " " << (1 - _yo) * scale_mesh << " "
+             << (100 - _xo) * scale_mesh << " " << (100 - _yo) * scale_mesh << " "
+             << (-100 - _xo) * scale_mesh << " " << (100 - _yo) * scale_mesh
              << " quad_white" << endl;
-        mesh << (1 - _xo) * scale << " " << (-100 - _yo) * scale << " "
-             << (1 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (-100 - _yo) * scale
+        mesh << (1 - _xo) * scale_mesh << " " << (-100 - _yo) * scale_mesh << " "
+             << (1 - _xo) * scale_mesh << " " << (100 - _yo) * scale_mesh << " "
+             << (100 - _xo) * scale_mesh << " " << (100 - _yo) * scale_mesh << " "
+             << (100 - _xo) * scale_mesh << " " << (-100 - _yo) * scale_mesh
              << " quad_white" << endl;
     }
 
@@ -421,7 +421,7 @@ inline void PlotMesh()
 }
 inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
 {
-    fstream file("MPS1.ps", ios::out);
+    fstream file("MPS.ps", ios::out);
     file.precision(30);
     file << "%!PS-Adobe-3.0" << endl;
     file << "60 60 scale     % one unit = one Centimeter" << endl;
@@ -429,13 +429,13 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
     double xmin(0.0), ymin(0.0);
     double scale_x, scale_y;
     double shift_x, shift_y;
-
+    
     scale_x = 11.0 / (_nx * _sx);
     scale_y = 10.0 / (_ny * _sy);
 
-    scale = scale_x;
+   
     shift_x = 0;
-    shift_y = 0.05 * (28.0 - (_ny * _sy) * scale) + 1.5;
+    shift_y = 0.05 * (28.0 - (_ny * _sy) * scale_x) + 1.5;
 
 
     file << shift_x << " " << shift_y << " translate" << std::endl;
@@ -539,7 +539,7 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
     file << "quad_bold"      << endl;*/
 
     /*
-   for(size_t i = 0 ;i < num_points ; i++){
+   for(size_t i = 0 ;i < _num_points ; i++){
 
        file << "/Times-Roman findfont" << endl;
        file << "0.15 scalefont" << endl;
@@ -573,8 +573,8 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
         double x1, y1, x2, y2;
 
         for (iactive = 0; iactive < num_active; iactive++) {
-            ii = active_i[iactive];
-            jj = active_j[iactive];
+            ii = _active_i[iactive];
+            jj = _active_j[iactive];
             x1 = _xo + ii * ssx;
             y1 = _yo + jj * ssy;
             x2 = x1 + ssx;
@@ -587,8 +587,8 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
         }
 
         for (iactive = 0; iactive < num_active; iactive++) {
-            ii = active_i[iactive];
-            jj = active_j[iactive];
+            ii = _active_i[iactive];
+            jj = _active_j[iactive];
             x1 = _xo + ii * ssx;
             y1 = _yo + jj * ssy;
             x2 = x1 + ssx;
@@ -602,20 +602,20 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
     }
 
 
-    for (size_t i = 0; i < num_points; i++) {
+    for (size_t i = 0; i < _num_points; i++) {
         if (_active[i] == 0) {
             continue;
         }
-        // file<< (x[i]-_xo)*scale<<" "<< (y[i]-_yo)*scale<<" "<<r_in*scale<<"
+        // file<< (x[i]-_xo)*scale_mesh<<" "<< (y[i]-_yo)*scale_mesh<<" "<<r_in*scale_mesh<<"
         // pink_disk"<<endl;
     }
 
-    for (size_t i = 0; i < num_points; i++) {
+    for (size_t i = 0; i < _num_points; i++) {
         if (_active[i] == 0) {
             continue;
         }
-        // file << (x[i]-_xo) * scale <<" "<< (y[i]-_yo) * scale <<" "<< r *
-        // scale<< " 0 360 arc"<< endl; // disk plotting file << "fill" << endl;
+        // file << (x[i]-_xo) * scale_mesh <<" "<< (y[i]-_yo) * scale_mesh <<" "<< r *
+        // scale_mesh<< " 0 360 arc"<< endl; // disk plotting file << "fill" << endl;
         // file << "stroke"<<endl;
         // file << "0 0 0 setrgbcolor" << endl;
         if (_disk_color[i] == 0) {
@@ -631,8 +631,9 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
         file << "stroke" << endl;
 
         if (r_in != r_out) {
-            file << (x[i] - _xo) * scale << " " << (y[i] - _yo) * scale << " "
-                 << r_out * scale << " 0 360 arc closepath"
+            file << (x[i] - _xo) * scale << " " << (y[i] - _yo) * scale
+                 << " " << r_out * scale
+                 << " 0 360 arc closepath"
                  << endl;  // disk plotting
             file << "stroke" << endl;
         }
@@ -653,52 +654,16 @@ inline void PLOT(double r_in, double r_out, size_t iref, double ssx, double ssy)
     }
 
     file << "0 0 0 setrgbcolor" << endl;
-    file << (0 - _xo) * scale << "  " << (0 - _yo) * scale << "  ";
+    file << (0 - _xo) * scale << "  " << (0 - _yo) * scale_x << "  ";
     file << (0 - _xo) * scale << "  " << (1.0 - _yo) * scale << "  ";
     file << (1.0 - _xo) * scale << "  " << (1.0 - _yo) * scale << "  ";
     file << (1.0 - _xo) * scale << "  " << (0.0 - _yo) * scale << "  ";
     file << "quad_bold" << endl;
 
 
-    if (false) {
-        for (size_t i = 0; i < _nx; i++) {
-            double x = _xo + i * _sx;
-            for (size_t j = 0; j < _ny; j++) {
-                double y = _yo + j * _sy;
-                file << (x - _xo) * scale << "  " << (y - _yo) * scale << "  ";
-                file << (x + _sx - _xo) * scale << "  " << (y - _yo) * scale
-                     << "  ";
-                file << (x + _sx - _xo) * scale << "  "
-                     << (y + _sy - _yo) * scale << "  ";
-                file << (x - _xo) * scale << "  " << (y + _sy - _yo) * scale
-                     << "  ";
-                file << "quad" << endl;
-            }
-        }
-    }
+   
 
-    if (false) {
-        file << (-100 - _xo) * scale << " " << (0 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (0 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (-100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (-100 - _yo) * scale
-             << " quad_white" << endl;
-        file << (0 - _xo) * scale << " " << (-100 - _yo) * scale << " "
-             << (0 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (-100 - _yo) * scale
-             << " quad_white" << endl;
-        file << (-100 - _xo) * scale << " " << (1 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (1 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (-100 - _xo) * scale << " " << (100 - _yo) * scale
-             << " quad_white" << endl;
-        file << (1 - _xo) * scale << " " << (-100 - _yo) * scale << " "
-             << (1 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (100 - _yo) * scale << " "
-             << (100 - _xo) * scale << " " << (-100 - _yo) * scale
-             << " quad_white" << endl;
-    }
+  
 
 
     file.close();
